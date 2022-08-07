@@ -67,10 +67,6 @@ on the card
 
     /* Cloze */
     --cloze-color: hsla(192, 100%, 83%, 1);
-
-    /* Default code */
-    --code-color: hsl(193, 43%, 67%);
-    --code-background-color: hsl(222, 16%, 28%);
 }
 
 /* --------------------BACKGROUND-------------------- */
@@ -103,6 +99,10 @@ html.mobile {
     flex-flow: column nowrap;
     justify-content: left;
     align-items: stretch;
+
+    /* Default code */
+    --code-color: hsl(193, 43%, 67%);
+    --code-background-color: hsl(222, 16%, 28%);
 }
 
 /* ----------------------FIELDS---------------------- */
