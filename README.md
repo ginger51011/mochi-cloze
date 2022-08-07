@@ -1,6 +1,6 @@
 # mochi-cloze, a simple and pretty Anki card template
 
-_Based on original by [https://github.com/pranavdeshai](pranavdeshai), licensed under MIT_
+_Based on original by [pranavdeshai](https://github.com/pranavdeshai), licensed under MIT_
 
 A simple and pretty Anki card template.
 
