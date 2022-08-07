@@ -15,7 +15,8 @@ with later changes by Emil Eriksson (@ginger51011)
 <script>
     {
         // Add specials here
-        const approvedCodeClasses = ['rust', 'haskell'];
+        const approvedNoteClasses = ['rust', 'haskell'];
+
         let progLangSet = false;
         let clearedOnce = false;
 
@@ -56,7 +57,7 @@ with later changes by Emil Eriksson (@ginger51011)
                         return; // More checks not necessary
                     }
                     
-                    const validCodeTag = approvedCodeClasses.includes(lowerBottomLevelTag);
+                    const validCodeTag = approvedNoteClasses.includes(lowerBottomLevelTag);
 
                     if (validCodeTag && !progLangSet) {
                         noteEl.classList.add(lowerBottomLevelTag);
@@ -64,7 +65,7 @@ with later changes by Emil Eriksson (@ginger51011)
                     } else if (validCodeTag && progLangSet && !clearedOnce) {
                         // We have more than one programming language, we remove the classes from <code>
                         // to use the default
-                        noteEl.classList.remove(...approvedCodeClasses);
+                        noteEl.classList.remove(...approvedNoteClasses);
                         clearedOnce = true;
                     }
                 }
