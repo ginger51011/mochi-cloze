@@ -22,49 +22,57 @@ with later changes by Emil Eriksson (@ginger51011)
 
 
 <script>
-{
-    // Add specials here
-    const approvedNoteClasses = ['rust', 'haskell'];
-    
-    const noteEl = document.querySelector('.note');
-    const tagEl = document.querySelector('.tags-container');
-    if (tagEl) {
-        const tags = tagEl.innerHTML.split(' ');
-        let nbrHiddenTags = 0;
-        let html = ''; 
-        tags.forEach(function (tag) {
-            if (tag != false) {
-                // We only want to show the bottom tag, for example when we want to use 'hidden_tag'
-                let newTag = '';
-                if (tag.includes('::')) {
-                    const topLevelTag = tag.substring(0, tag.indexOf("::"));
-                    const bottomLevelTag = tag.substring(
-                        tag.lastIndexOf('::') + 2
-                    );
+    {
+        // Add specials here
+        const approvedCodeClasses = ['rust', 'haskell'];
+        let progLangSet = false;
+        let clearedOnce = false;
 
-                    if (bottomLevelTag === 'hidden_tag') {
-                        nbrHiddenTags += 1;
-                    } else if (approvedNoteClasses.includes(tag)) {
-                        noteEl.classList.add(tag);
+        const codeEls = document.querySelectorAll('code');
+        const tagEl = document.querySelector('.tags-container');
+        if (tagEl) {
+            const tags = tagEl.innerHTML.split(' ');
+            let nbrHiddenTags = 0;
+            let html = '';
+            tags.forEach(function (tag) {
+                if (tag != false) {
+                    // We only want to show the bottom tag, for example when we want to use 'hidden_tag'
+                    let newTag = '';
+                    if (tag.includes('::')) {
+                        const topLevelTag = tag.substring(0, tag.indexOf("::"));
+                        const bottomLevelTag = tag.substring(
+                            tag.lastIndexOf('::') + 2
+                        );
+
+                        if (bottomLevelTag === 'hidden_tag') {
+                            nbrHiddenTags += 1;
+                        } else if (approvedCodeClasses.includes(bottomLevelTag) && !progLangSet) {
+                            codeEls.forEach((e) => e.classList.add(bottomLevelTag));
+                            progLangSet = true;
+                        } else if (progLangSet && !clearedOnce) {
+                            // We have more than one programming language, we remove the classes from <code>
+                            // to use the default
+                            codeEls.forEach((e) => e.classList.remove(...codeEls.classList));
+                            clearedOnce = true;
+                        }
+
+                        // Use `<wbr>` to ensure wrapping is done between tags, but only after to prevent `<wbr><wbr>`
+                        // Also set tags as class of tag, to allow special tags
+                        newTag =
+                            `<span class="tag ${topLevelTag} ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
+                    } else {
+                        const bottomLevelTag = tag;
+                        newTag =
+                            `<span class="tag ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
                     }
-
-                    // Use `<wbr>` to ensure wrapping is done between tags, but only after to prevent `<wbr><wbr>`
-                    // Also set tags as class of tag, to allow special tags
-                    newTag =
-                        `<span class="tag ${topLevelTag} ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
-                } else {
-                    const bottomLevelTag = tag;
-                    newTag =
-                        `<span class="tag ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
+                    html += newTag;
                 }
-                html += newTag;
+            });
+            // Add indication of nbr of hidden tags as a tag
+            if (nbrHiddenTags > 0) {
+                html += `<span class="tag">+${nbrHiddenTags}&nbsp;hidden&nbsp;tag${nbrHiddenTags > 1 ? 's' : ''}</span><wbr>`
             }
-        });
-        // Add indication of nbr of hidden tags as a tag
-        if (nbrHiddenTags > 0) {
-            html += `<span class="tag">+${nbrHiddenTags}&nbsp;hidden&nbsp;tag${nbrHiddenTags > 1 ? 's' : ''}</span><wbr>`
+            tagEl.innerHTML = html;
         }
-        tagEl.innerHTML = html;
     }
-}
 </script>
