@@ -38,37 +38,44 @@ with later changes by Emil Eriksson (@ginger51011)
                 if (tag != false) {
                     // We only want to show the bottom tag, for example when we want to use 'hidden_tag'
                     let newTag = '';
+                    let bottomLevelTag;
                     if (tag.includes('::')) {
                         const topLevelTag = tag.substring(0, tag.indexOf("::"));
-                        const bottomLevelTag = tag.substring(
+                        bottomLevelTag = tag.substring(
                             tag.lastIndexOf('::') + 2
                         );
-
-                        const lowerBottomLevelTag = bottomLevelTag.toLowerCase();
-                        const validCodeTag = approvedCodeClasses.includes(lowerBottomLevelTag);
-
-                        if (lowerBottomLevelTag === 'hidden_tag') {
-                            nbrHiddenTags += 1;
-                        } else if (validCodeTag && !progLangSet) {
-                            noteEl.classList.add(lowerBottomLevelTag);
-                            progLangSet = true;
-                        } else if (validCodeTag && progLangSet && !clearedOnce) {
-                            // We have more than one programming language, we remove the classes from <code>
-                            // to use the default
-                            noteEl.classList.remove(...approvedCodeClasses);
-                            clearedOnce = true;
-                        }
 
                         // Use `<wbr>` to ensure wrapping is done between tags, but only after to prevent `<wbr><wbr>`
                         // Also set tags as class of tag, to allow special tags
                         newTag =
                             `<span class="tag ${topLevelTag} ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
                     } else {
-                        const bottomLevelTag = tag;
+                        bottomLevelTag = tag;
                         newTag =
                             `<span class="tag ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
                     }
+
                     html += newTag;
+
+                    // Dynamic styling based on bottom level tag
+                    const lowerBottomLevelTag = bottomLevelTag.toLowerCase();
+
+                    if (lowerBottomLevelTag === 'hidden_tag') {
+                        nbrHiddenTags += 1;
+                        return; // More checks not necessary
+                    }
+                    
+                    const validCodeTag = approvedCodeClasses.includes(lowerBottomLevelTag);
+
+                    if (validCodeTag && !progLangSet) {
+                        noteEl.classList.add(lowerBottomLevelTag);
+                        progLangSet = true;
+                    } else if (validCodeTag && progLangSet && !clearedOnce) {
+                        // We have more than one programming language, we remove the classes from <code>
+                        // to use the default
+                        noteEl.classList.remove(...approvedCodeClasses);
+                        clearedOnce = true;
+                    }
                 }
             });
             // Add indication of nbr of hidden tags as a tag
