@@ -1,0 +1,70 @@
+<!--
+HTML/CSS/JS original source https://github.com/pranavdeshai/anki-templates, with copyright (c) 2022 Deshai Pranav (@pranavdeshai) under MIT License,
+with later changes by Emil Eriksson (@ginger51011)
+-->
+
+<div class="note">
+    <div class="main-container">
+        {{#Tags}}
+        <div class="tags-container">{{Tags}}</div>
+        {{/Tags}}
+        <div class="text">{{cloze:Text}}</div>
+    </div>
+    {{#Back Extra}}
+    <div class="divider">
+        <hr />
+    </div>
+    <div class="extra-container">
+        <div class="extra">{{Back Extra}}</div>
+    </div>
+    {{/Back Extra}}
+</div>
+
+
+<script>
+{
+    // Add specials here
+    const approvedNoteClasses = ['rust', 'haskell'];
+    
+    const noteEl = document.querySelector('.note');
+    const tagEl = document.querySelector('.tags-container');
+    if (tagEl) {
+        const tags = tagEl.innerHTML.split(' ');
+        let nbrHiddenTags = 0;
+        let html = ''; 
+        tags.forEach(function (tag) {
+            if (tag != false) {
+                // We only want to show the bottom tag, for example when we want to use 'hidden_tag'
+                let newTag = '';
+                if (tag.includes('::')) {
+                    const topLevelTag = tag.substring(0, tag.indexOf("::"));
+                    const bottomLevelTag = tag.substring(
+                        tag.lastIndexOf('::') + 2
+                    );
+
+                    if (bottomLevelTag === 'hidden_tag') {
+                        nbrHiddenTags += 1;
+                    } else if (approvedNoteClasses.includes(tag)) {
+                        noteEl.classList.add(tag);
+                    }
+
+                    // Use `<wbr>` to ensure wrapping is done between tags, but only after to prevent `<wbr><wbr>`
+                    // Also set tags as class of tag, to allow special tags
+                    newTag =
+                        `<span class="tag ${topLevelTag} ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
+                } else {
+                    const bottomLevelTag = tag;
+                    newTag =
+                        `<span class="tag ${bottomLevelTag}">${bottomLevelTag}</span><wbr>`;
+                }
+                html += newTag;
+            }
+        });
+        // Add indication of nbr of hidden tags as a tag
+        if (nbrHiddenTags > 0) {
+            html += `<span class="tag">+${nbrHiddenTags}&nbsp;hidden&nbsp;tag${nbrHiddenTags > 1 ? 's' : ''}</span><wbr>`
+        }
+        tagEl.innerHTML = html;
+    }
+}
+</script>
