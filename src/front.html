@@ -3,11 +3,13 @@ HTML/CSS/JS original source https://github.com/pranavdeshai/anki-templates, with
 with later changes by Emil Eriksson (@ginger51011)
 -->
 
-<div class="main-container">
-    {{#Tags}}
-    <div class="tags-container">{{Tags}}</div>
-    {{/Tags}}
-    <div class="text">{{cloze:Text}}</div>
+<div class="note">
+    <div class="main-container">
+        {{#Tags}}
+        <div class="tags-container">{{Tags}}</div>
+        {{/Tags}}
+        <div class="text">{{cloze:Text}}</div>
+    </div>
 </div>
 
 <script>
@@ -32,7 +34,7 @@ with later changes by Emil Eriksson (@ginger51011)
                         const bottomLevelTag = tag.substring(
                             tag.lastIndexOf('::') + 2
                         );
-                        
+
                         const validCodeTag = approvedCodeClasses.includes(bottomLevelTag);
 
                         if (bottomLevelTag === 'hidden_tag') {

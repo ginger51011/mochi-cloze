@@ -86,27 +86,7 @@ html.mobile {
 }
 
 /* -----------------------CARD----------------------- */
-.card {
-    background-color: var(--card-background);
-    border-radius: var(--card-border-radius);
-    border: var(--card-border);
-    box-shadow: var(--card-shadow);
-    color: var(--text-normal-color);
-    font-family: var(--font-family-normal);
-    font-size: var(--font-size-normal);
-    line-height: var(--line-height);
-    margin: 0 auto;
-    max-width: var(--card-max-width);
-
-    /* Flexbox container */
-    display: flex;
-    flex-flow: column nowrap;
-    justify-content: left;
-    align-items: stretch;
-}
-
-/* Ugly fix for AnkiDroid, we use the same */
-.card.nightMode {
+.note {
     background-color: var(--card-background);
     border-radius: var(--card-border-radius);
     border: var(--card-border);
