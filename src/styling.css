@@ -14,20 +14,29 @@ code {
 
 /* For handling programming languages differently */
 .rust {
-    /* ayu from The Book */
-    --code-color: hsl(33.7, 100%, 66.5%) !important;
-    --code-background-color: hsl(212.3, 20.6%, 12.4%) !important;
+    /* Gruvbox */
+    --card-background: hsl(195, 6%, 12%);
+    
+    --cloze-color: hsl(157, 16%, 58%);
+
+    --code-color: hsl(27, 99%, 55%);
+    --code-background-color: hsl(20, 5%, 22%);
 }
 
 .haskell {
-    --code-color: hsl(290, 75%, 71%) !important;
-    --code-background-color: hsl(200, 7%, 8%) !important;
+    /* Dracula */
+    --card-background: hsl(231, 15%, 18%);
+    
+    --cloze-color: hsl(191, 97%, 77%);
+
+    --code-color: hsl(265, 89%, 78%);
+    --code-background-color: hsl(232, 14%, 31%);
 }
 
 /*
 All tags that should be hidden can use a subtag
 of their intended tag named `hidden_tag`, e.g.
-example_tag::hidden_tag, which will not be seen
+    example_tag::hidden_tag, which will not be seen
 on the card
 */
 .hidden_tag {
