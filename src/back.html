@@ -43,13 +43,15 @@ with later changes by Emil Eriksson (@ginger51011)
                         const bottomLevelTag = tag.substring(
                             tag.lastIndexOf('::') + 2
                         );
+                        
+                        const validCodeTag = approvedCodeClasses.includes(bottomLevelTag);
 
                         if (bottomLevelTag === 'hidden_tag') {
                             nbrHiddenTags += 1;
-                        } else if (approvedCodeClasses.includes(bottomLevelTag) && !progLangSet) {
+                        } else if (validCodeTag && !progLangSet) {
                             codeEls.forEach((e) => e.classList.add(bottomLevelTag));
                             progLangSet = true;
-                        } else if (progLangSet && !clearedOnce) {
+                        } else if (validCodeTag && progLangSet && !clearedOnce) {
                             // We have more than one programming language, we remove the classes from <code>
                             // to use the default
                             codeEls.forEach((e) => e.classList.remove(...codeEls.classList));
