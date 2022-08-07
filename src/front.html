@@ -43,7 +43,7 @@ with later changes by Emil Eriksson (@ginger51011)
                         } else if (validCodeTag && progLangSet && !clearedOnce) {
                             // We have more than one programming language, we remove the classes from <code>
                             // to use the default
-                            codeEls.forEach((e) => e.classList.remove(...codeEls.classList));
+                            codeEls.forEach((e) => e.classList.remove(...e.classList));
                             clearedOnce = true;
                         }
 
