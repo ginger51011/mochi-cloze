@@ -15,7 +15,7 @@ code {
 /* For handling programming languages differently */
 .rust {
     /* Gruvbox */
-    --card-background: hsl(195, 6%, 12%);
+    --card-background: hsl(0, 0%, 16%);
 
     --cloze-color: hsl(61, 66%, 44%);
 
