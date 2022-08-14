@@ -129,6 +129,7 @@ html.mobile {
 /* -----------------------TAGS----------------------- */
 .tags-container {
     margin-bottom: 1em;
+    line-height: 1.8em;
 
     /* Flexbox - NOT working
     display: flex;
