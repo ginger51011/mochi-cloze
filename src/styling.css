@@ -33,6 +33,16 @@ code {
     --code-background-color: hsl(232, 14%, 31%);
 }
 
+.c {
+    /* Noctics Bordo */
+    --card-background: hsl(338, 9%, 18%);
+    
+    --cloze-color: hsl(187, 78%, 40%);
+    
+    --code-color: hsl(33, 65%, 70%);
+    --code-background-color: hsl(338, 6%, 27%);
+}
+
 /*
 All tags that should be hidden can use a subtag
 of their intended tag named `hidden_tag`, e.g.
