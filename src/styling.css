@@ -34,13 +34,13 @@ code {
 }
 
 .c {
-    /* Noctics Bordo */
-    --card-background: hsl(338, 9%, 18%);
+    /* Kimbie Dark */
+    --card-background: hsl(35, 39%, 10%);
     
-    --cloze-color: hsl(187, 78%, 40%);
+    --cloze-color: hsl(16, 86%, 57%);
     
-    --code-color: hsl(33, 65%, 70%);
-    --code-background-color: hsl(345, 5%, 15%);
+    --code-color: hsl(32, 47%, 68%);
+    --code-background-color: hsl(34, 30%, 25%);
 }
 
 /*
